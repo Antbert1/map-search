@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from './actions';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        Maps
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state, props) => {
+    return {
+        data: state.dataReducer.data
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(Actions, dispatch) }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
